@@ -1,22 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useContext } from "react";
+import { AppContext } from "./HOC/context-HOC";
 
 function App() {
+  let { myState, setMyState } = useContext(AppContext);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let inputVal = document.querySelector("input").value;
+    setMyState(inputVal);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {myState}
+        <form onSubmit={handleSubmit}>
+          <input type="text" />
+          <button type="submit">SUBMIT</button>
+        </form>
       </header>
     </div>
   );
